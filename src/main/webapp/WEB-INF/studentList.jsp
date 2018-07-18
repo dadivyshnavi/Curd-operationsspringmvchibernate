@@ -36,41 +36,7 @@ th {
             }
 </style>
 <body>
-<form:form method="post" modelAttribute="stubean" action="${pageContext.request.contextPath}/stu">
-<table>
-		<tr>
-			<th colspan="2">Add Student</th>
-		</tr>
-		<tr>
-	<form:hidden path="id" />
-	<tr>
-	<td>
-         <lablel for="student name">Student Name</lablel>
-               
-         <form:input path="name" class="form-control validate onlyCharacters" size="30" maxlength="30"></form:input>
-   </td>
-   </tr>
-        
-		<tr>
-		<td>
-		<lablel for="student marks">Student Marks</lablel>
-          <form:input path="marks" class="form-control validate onlyCharacters" size="30" maxlength="3"></form:input>
-          </td>
-		</tr>
-		<tr>
-		<td>
-            <lablel for="student course">Student course</lablel>    
-          <form:input path="course" class="form-control validate onlyCharacters" size="30" maxlength="5"></form:input>
-          </td>
-   </tr>
-		<tr>
-			<td colspan="2"><input type="submit" id="submit1"
-				class="blue-button" /></td>
-		</tr>
-		
-		
-	</table> 
-</form:form>
+
 <table>
 <tr>
 <th> id  </th> <th> course  </th> <th> marks  </th> <th> name  </th>
@@ -92,12 +58,10 @@ th {
 
 
 </table>
+
+<!-- this is for show students view in separate .jsp file (studentsList.jsp)-->
+
+
+
 </body>
-
-<script type='text/javascript' src='/JS/jquery-1.11.1.min.js'></script>
-
-<script type='text/javascript' src='JS/customValidation.js'></script>
-
-<!-- this is for show students list and view in same page -->
-
 </html>

@@ -21,6 +21,13 @@ public class Employee {
 	
 	
 	private String lname;
+	
+	private String designation;
+	
+	private String salary;
+	
+	private String address;
+	
 
 
 	public int getId() {
@@ -53,13 +60,46 @@ public class Employee {
 	}
 
 
-	@Override
-	public String toString() {
-		return "Employee [id=" + id + ", fname=" + fname + ", lname=" + lname + "]";
+	
+
+	public String getDesignation() {
+		return designation;
+	}
+
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+
+
+	public String getSalary() {
+		return salary;
+	}
+
+
+	public void setSalary(String salary) {
+		this.salary = salary;
+	}
+
+
+	public String getAddress() {
+		return address;
+	}
+
+
+	
+
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 	
-	
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", fname=" + fname + ", lname=" + lname + ", designation=" + designation
+				+ ", salary=" + salary + ", address=" + address + "]";
+	}
 	
 	
 

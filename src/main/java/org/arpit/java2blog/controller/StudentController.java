@@ -1,5 +1,7 @@
 package org.arpit.java2blog.controller;
 
+import java.util.List;
+
 import org.arpit.java2blog.dao.StudentDao;
 import org.arpit.java2blog.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,10 @@ public class StudentController {
 	private String showStudentPage(Model model) {
 		
 		model.addAttribute("stubean",new Student());
+		 List<Student> list =       studentDao.getAllStudent();
+		 model.addAttribute("list",list);
+		   
+		   
 		return "Student";
 		
 		
@@ -38,14 +44,23 @@ public class StudentController {
 		return "redirect:stu";
 		
 		
-	
-		
-		
-		
-		
-		
 	}
 	
+/*	@RequestMapping(value = "/viewStudents", method = RequestMethod.GET, headers = "Accept=application/json")
+	private String showStudentsList(Model model) {
+		
+		   List<Student> list =       studentDao.getAllStudent();
+		   
+		   
+		   System.out.println(list);
+		
+		   model.addAttribute("list",list);
+		   
+		return "studentList";
+		
+		// this is for Show studentsList view in separate .jsp (studentsList.jsp)file after adding in form.
+		
+	}*/
 	
 	
 	

@@ -1,5 +1,7 @@
 package org.arpit.java2blog.controller;
 
+import java.util.List;
+
 import org.arpit.java2blog.dao.EmployeeDao;
 import org.arpit.java2blog.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class EmployeeController {
 		
 		
 		model.addAttribute("empbean" ,new Employee());
+		
+		List<Employee> list=employeeDao.getAllemployee();
+		model.addAttribute("list",list);
 		
 		return "employee";
 		
