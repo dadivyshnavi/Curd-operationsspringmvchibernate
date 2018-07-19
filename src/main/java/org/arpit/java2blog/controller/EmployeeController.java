@@ -17,7 +17,7 @@ public class EmployeeController {
 	
 	@Autowired
 	EmployeeDao employeeDao;
-	private Integer employeeId;
+	
 	
 	
 	@RequestMapping(value = "/emp", method = RequestMethod.GET, headers = "Accept=application/json")
@@ -56,7 +56,7 @@ public class EmployeeController {
 	@RequestMapping(value = "/deleteEmployee", method = RequestMethod.GET, headers = "Accept=application/json")
 	public String deleteEmployee(@RequestParam("id") String id)
 	{
-		employeeDao.deleteEmployee(Integer.valueOf(id));
+		employeeDao.deleteEmployee(Integer.parseInt(id));
 		
 		  
 		
@@ -64,4 +64,26 @@ public class EmployeeController {
 		
 	
 	}
+	
+	
+	@RequestMapping(value = "/editEmployee", method = RequestMethod.GET, headers = "Accept=application/json")
+	public String editEmployee(@RequestParam("id") String id,Model model)
+	{
+		Employee employee =employeeDao.getEmployeeById(Integer.parseInt(id));
+		System.out.println(employee);
+		model.addAttribute("empbean" ,employee);
+		
+		List<Employee> list=employeeDao.getAllemployee();
+		model.addAttribute("list",list);
+		
+		return "employee";
+		
+	
+	}
+	
+	
+	
+	
+	
+	
 }

@@ -27,10 +27,11 @@ public class EmployeeDao {
 	
 	public void addEmployee(Employee employee) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.save(employee);
+		session.saveOrUpdate(employee);
 	}
 
 	
+	@SuppressWarnings("unchecked")
 	public List<Employee> getAllemployee(){
 		
 		String hql="from Employee";
@@ -62,5 +63,35 @@ public class EmployeeDao {
 				System.out.println("record not deleted");						
 			
 	    }
+
+
+
+	public Employee getEmployeeById(int parseInt) {
+		// TODO Auto-generated method stub
+		
+		String hql="from Employee where id="+parseInt ;
+		Session session=this.sessionFactory.getCurrentSession();
+		Query query=session.createQuery(hql);
+		
+		List<Employee> list= query.list();
+		
+		if(list.isEmpty())
+		{
+			
+			return null;
+		}
+		else
+		{
+		return list.get(0);
+		}
+	}
+
+
+
+	
+	 
+	
+	 
+	 
 	
 }
