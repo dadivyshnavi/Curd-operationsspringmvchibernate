@@ -104,7 +104,7 @@ th {
 
 
 <tr>
-<th> id  </th> <th> First Name  </th> <th> Last Name  </th><th> Designation  </th> <th> Salary  </th> <th> Address </th>
+<th> id  </th> <th> First Name  </th> <th> Last Name  </th><th> Designation  </th> <th> Salary  </th> <th> Address </th><th> Actions </th>
 
 
 </tr>
@@ -118,6 +118,7 @@ th {
 <td> "${item.designation}" </td>
 <td> "${item.salary}" </td>
 <td> "${item.address}" </td>
+<td> <a href="deleteEmployee?id=${item.id }">Delete</a> </td>
 
 
 

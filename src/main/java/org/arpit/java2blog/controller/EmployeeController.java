@@ -10,12 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class EmployeeController {
 	
 	@Autowired
 	EmployeeDao employeeDao;
+	private Integer employeeId;
 	
 	
 	@RequestMapping(value = "/emp", method = RequestMethod.GET, headers = "Accept=application/json")
@@ -50,13 +52,16 @@ public class EmployeeController {
 		
 		
 	
+}
+	@RequestMapping(value = "/deleteEmployee", method = RequestMethod.GET, headers = "Accept=application/json")
+	public String deleteEmployee(@RequestParam("id") String id)
+	{
+		employeeDao.deleteEmployee(Integer.valueOf(id));
 		
+		  
 		
+		return "redirect:emp";
 		
-		
-		
+	
 	}
-	
-	
-
 }
