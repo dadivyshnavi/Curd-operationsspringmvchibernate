@@ -85,6 +85,25 @@ public class EmployeeDao {
 		return list.get(0);
 		}
 	}
+	public boolean checkUserExistsOrNot(Employee em)
+	
+	{
+		String hql="from Employee where salary="+em.getSalary();
+		Session session=this.sessionFactory.getCurrentSession();
+		Query query=session.createQuery(hql);
+		
+		List<Employee> list= query.list();
+		if(list.size()>0)
+		{
+			return true;
+		}
+			
+		else
+		{
+			return false;
+		}
+		
+	}
 
 
 
