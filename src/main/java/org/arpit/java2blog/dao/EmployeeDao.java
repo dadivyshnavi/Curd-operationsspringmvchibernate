@@ -88,7 +88,7 @@ public class EmployeeDao {
 	public boolean checkUserExistsOrNot(Employee em)
 	
 	{
-		String hql="from Employee where salary="+em.getSalary();
+		String hql="from Employee where salary="+em.getSalary()+"and phno="+em.getPhno();
 		Session session=this.sessionFactory.getCurrentSession();
 		Query query=session.createQuery(hql);
 		

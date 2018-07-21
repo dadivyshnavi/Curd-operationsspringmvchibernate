@@ -87,6 +87,27 @@ th {
 		
 		
 		<tr>
+		<td>
+		  <lablel for="phno">Mobile No</lablel>
+          <form:input path ="phno" class="form-control validate numericOnly2" size="30" maxlength="10"></form:input>
+		</td>
+		</tr>
+		
+		
+		<tr>
+		<td>
+		  <lablel for="DateofBirth">Joining Date</lablel>
+          <form:input type="datetime-local" path="dob" ></form:input>
+		</td>
+		</tr>
+		
+		
+		
+		
+		
+		
+		
+		<tr>
 			<td colspan="2"><center><input type="submit" id="submit1"
 				class="blue-button" /></center></td>
 		</tr>
@@ -99,12 +120,12 @@ th {
 
 
 <tr>
-			<th colspan="6" style="text-align:center">Employees List</th>
+			<th colspan="8" style="text-align:center">Employees List</th>
 		</tr>
 
 
 <tr>
-<th> id  </th> <th> First Name  </th> <th> Last Name  </th><th> Designation  </th> <th> Salary  </th> <th> Address </th><th> Delete Actions </th><th> Edit Actions </th>
+<th> id  </th> <th> First Name  </th> <th> Last Name  </th><th> Designation  </th> <th> Salary  </th> <th> Address </th><th> MobileNo </th><th> DateofBirth </th><th> Delete Actions </th><th> Edit Actions </th>
 
 
 </tr>
@@ -118,6 +139,8 @@ th {
 <td> "${item.designation}" </td>
 <td> "${item.salary}" </td>
 <td> "${item.address}" </td>
+<td> "${item.phno}" </td>
+<td> "${item.dob}" </td>
 <td> <a href="deleteEmployee?id=${item.id }">Delete</a> </td>
 <td> <a href="editEmployee?id=${item.id }">Edit</a> </td>
 

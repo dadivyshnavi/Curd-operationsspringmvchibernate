@@ -38,8 +38,7 @@ public class EmployeeController {
 		
 	}
 	
-	
-	/*@RequestMapping(value = "/emp", method = RequestMethod.POST, headers = "Accept=application/json")
+	@RequestMapping(value = "/emp", method = RequestMethod.POST, headers = "Accept=application/json")
 	public String saveEmployee(@ModelAttribute Employee employee)
 	{
 		
@@ -52,7 +51,7 @@ public class EmployeeController {
 		
 		
 	
-	}*/
+	}
 	@RequestMapping(value = "/deleteEmployee", method = RequestMethod.GET, headers = "Accept=application/json")
 	public String deleteEmployee(@RequestParam("id") String id)
 	{
@@ -83,7 +82,7 @@ public class EmployeeController {
 	
 	
 	
-	@RequestMapping(value = "/emp", method = RequestMethod.POST, headers = "Accept=application/json")
+	/*@RequestMapping(value = "/emp", method = RequestMethod.POST, headers = "Accept=application/json")
 	public String empDuplicatesChecking(@ModelAttribute Employee employee)
 	{
 		
@@ -102,8 +101,12 @@ public class EmployeeController {
 		}
 		
 		return "redirect:emp";	
+		
+		
+		
+		**This is for duplicate checking**
 	
-	}
+	}*/
 	
 	
 }
