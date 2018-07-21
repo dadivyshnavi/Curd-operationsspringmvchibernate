@@ -38,7 +38,7 @@ public class EmployeeController {
 		
 	}
 	
-	@RequestMapping(value = "/emp", method = RequestMethod.POST, headers = "Accept=application/json")
+	/*@RequestMapping(value = "/emp", method = RequestMethod.POST, headers = "Accept=application/json")
 	public String saveEmployee(@ModelAttribute Employee employee)
 	{
 		
@@ -51,7 +51,7 @@ public class EmployeeController {
 		
 		
 	
-	}
+	}*/
 	@RequestMapping(value = "/deleteEmployee", method = RequestMethod.GET, headers = "Accept=application/json")
 	public String deleteEmployee(@RequestParam("id") String id)
 	{
@@ -82,11 +82,12 @@ public class EmployeeController {
 	
 	
 	
-	/*@RequestMapping(value = "/emp", method = RequestMethod.POST, headers = "Accept=application/json")
+    @RequestMapping(value = "/emp", method = RequestMethod.POST, headers = "Accept=application/json")
 	public String empDuplicatesChecking(@ModelAttribute Employee employee)
 	{
 		
-		
+		if(employee.getId() ==0)
+		{
 		System.out.println(employee);
 		boolean result=employeeDao.checkUserExistsOrNot(employee);
 		if(result==false) 
@@ -100,13 +101,28 @@ public class EmployeeController {
 			System.out.println("record alreday exists");
 		}
 		
+		}
+		
+		else  //Edit recored comes here
+		{
+			
+			
+			employeeDao.addEmployee(employee);
+			
+			
+			
+			
+			
+			
+		}
+		
 		return "redirect:emp";	
 		
 		
 		
-		**This is for duplicate checking**
+		//**This is for duplicate checking**
 	
-	}*/
+	}
 	
 	
 }
