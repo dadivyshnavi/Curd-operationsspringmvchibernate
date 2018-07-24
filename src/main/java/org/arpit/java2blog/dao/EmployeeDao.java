@@ -1,7 +1,10 @@
 package org.arpit.java2blog.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.arpit.java2blog.model.Designation;
 import org.arpit.java2blog.model.Employee;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -85,10 +88,10 @@ public class EmployeeDao {
 		return list.get(0);
 		}
 	}
-	public boolean checkUserExistsOrNot(Employee em)
+	public boolean checkUserExistsOrNot(Employee employee)
 	
 	{
-		String hql="from Employee where salary="+em.getSalary()+"and phno="+em.getPhno();
+		String hql="from Employee where salary="+employee.getSalary()+"and phno="+employee.getPhno();
 		Session session=this.sessionFactory.getCurrentSession();
 		Query query=session.createQuery(hql);
 		
@@ -106,9 +109,45 @@ public class EmployeeDao {
 	}
 
 
-
+public List<Designation> getAlldesignation(){
+		
+		String hql="from Designation";
+		Session session=this.sessionFactory.getCurrentSession();
+		Query query=session.createQuery(hql);
+		List<Designation> list=query.list();
+		
+		
+		
+		
+		
+		
+		System.out.println(list);
+		
+		return list;
+		
+		
+		
+}
 	
-	 
+	 public Map<Integer,String> getDesignationMap(){
+		 
+		 List<Designation> list=getAlldesignation();
+		 Map<Integer,String> map=new HashMap<Integer,String>();
+		 for(Designation  entry:list) {
+			 
+			 map.put(entry.getId(),entry.getDesignation());
+			 
+			 
+			 
+		 }
+		return map;
+		 
+		 
+		 
+		 
+		 
+		 
+	 }
 	
 	 
 	 

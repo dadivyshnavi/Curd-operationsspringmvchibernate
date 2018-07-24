@@ -3,19 +3,31 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
 <head>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
 <title>Insert title here</title>
+
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
 </head>
+<script>
+window.setTimeout(function() {
+    $(".msgcss").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 5000);
+</script>
 
 <style>           
-.blue-button{
+ .blue-button{
 	background: #25A6E1;
 	filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#25A6E1',endColorstr='#188BC0',GradientType=0);
 	padding:10px 20px;
@@ -45,8 +57,21 @@ th {
                 text-align: left;
                 padding: 5px 10px;
             }
-</style>
+</style> 
+<c:if test="${not empty msg}">
+		<div class="msgcss row">
+			<div class="col-sm-4 col-sm-offset-4">
+				<div class="form-group">
+					<div class="alert alert-${cssMsg} fadeIn animated">${msg}</div>
+				</div>
+			</div>
+		</div>
+	</c:if>
+	
+	
+	
 
+	
 <body>
 
 <form:form method="post" modelAttribute="empbean" action="${pageContext.request.contextPath}/emp">
@@ -72,8 +97,15 @@ th {
 		
 		<tr>
 		<td>
-		  <lablel for="Designation">Designation</lablel>
-          <form:input path="designation" class="form-control validate onlyCharacters" size="30" maxlength="10"></form:input>
+		 							 
+									<label class="col-md-3 control-label no-padding-right">Designation<span class="impColor">*</span></label>
+									
+										<form:select path="designation" class="form-control validate " >
+											<form:option value="">-- Select Designation --</form:option>
+											<form:options items="${roles}"/>
+										</form:select>
+										
+								
 		</td>
 		</tr>
 		
@@ -88,7 +120,7 @@ th {
 		<tr>
 		<td>
 		  <lablel for="Address">Address</lablel>
-          <form:textarea path="address" class="form-control validate onlyCharacters" size="30" maxlength="10"></form:textarea>
+          <form:textarea path="address" class="form-control validate onlyCharacters" size="30" maxlength="30"></form:textarea>
 		</td>
 		</tr>
 		
@@ -176,6 +208,7 @@ th {
     $( "#datepicker" ).datepicker();
   } );
   </script>
+  
 
  <!-- this is for show form and view(.jsp file) in same page -->
 

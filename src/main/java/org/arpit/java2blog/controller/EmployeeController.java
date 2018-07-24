@@ -1,8 +1,12 @@
 package org.arpit.java2blog.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.arpit.java2blog.dao.EmployeeDao;
+import org.arpit.java2blog.model.Designation;
 import org.arpit.java2blog.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class EmployeeController {
@@ -26,9 +32,16 @@ public class EmployeeController {
 		
 		
 		model.addAttribute("empbean" ,new Employee());
+		model.addAttribute("roles",employeeDao.getDesignationMap());
 		
-		List<Employee> list=employeeDao.getAllemployee();
-		model.addAttribute("list",list);
+		
+		/*List<Designation> list=employeeDao.getAlldesignation();
+		model.addAttribute("list",list);*/
+		
+		List<Employee> elist=employeeDao.getAllemployee();
+		model.addAttribute("elist",elist);
+		//ap<Integer,String> desgMap=employeeDao.getDesignationMap();
+		
 		
 		return "employee";
 		
@@ -53,11 +66,13 @@ public class EmployeeController {
 	
 	}*/
 	@RequestMapping(value = "/deleteEmployee", method = RequestMethod.GET, headers = "Accept=application/json")
-	public String deleteEmployee(@RequestParam("id") String id)
+	public String deleteEmployee(@RequestParam("id") String id,RedirectAttributes redir)
 	{
 		employeeDao.deleteEmployee(Integer.parseInt(id));
 		
-		  
+		redir.addFlashAttribute("msg", "Record deleted successfully");
+		 redir.addFlashAttribute("cssMsg", "danger");
+
 		
 		return "redirect:emp";
 		
@@ -66,7 +81,7 @@ public class EmployeeController {
 	
 	
 	@RequestMapping(value = "/editEmployee", method = RequestMethod.GET, headers = "Accept=application/json")
-	public String editEmployee(@RequestParam("id") String id,Model model)
+	public String editEmployee(@RequestParam("id") String id,Model model,RedirectAttributes redir)
 	{
 		Employee employee =employeeDao.getEmployeeById(Integer.parseInt(id));
 		System.out.println(employee);
@@ -74,6 +89,7 @@ public class EmployeeController {
 		
 		List<Employee> list=employeeDao.getAllemployee();
 		model.addAttribute("list",list);
+		
 		
 		return "employee";
 		
@@ -83,7 +99,7 @@ public class EmployeeController {
 	
 	
     @RequestMapping(value = "/emp", method = RequestMethod.POST, headers = "Accept=application/json")
-	public String empDuplicatesChecking(@ModelAttribute Employee employee)
+	public String empDuplicatesChecking(@ModelAttribute Employee employee,RedirectAttributes redir)
 	{
 		
 		if(employee.getId() ==0)
@@ -94,19 +110,25 @@ public class EmployeeController {
 		{
 		
 		employeeDao.addEmployee(employee);
-		System.out.println("Record Inserted Successfully");
+		//ystem.out.println("Record Inserted Successfully");
+		redir.addFlashAttribute("msg", "Record Inserted Successfully");
+		redir.addFlashAttribute("cssMsg", "success");
 		}
 		else
 		{
-			System.out.println("record alreday exists");
+			//System.out.println("record alreday exists");
+			redir.addFlashAttribute("msg", "Record Already Exists");
+			redir.addFlashAttribute("cssMsg", "warning");
+
 		}
 		
 		}
 		
 		else  //Edit recored comes here
 		{
-			
-			
+			 redir.addFlashAttribute("msg", "Record updated successfully");
+			 redir.addFlashAttribute("cssMsg", "primary");
+
 			employeeDao.addEmployee(employee);
 			
 			
@@ -124,5 +146,14 @@ public class EmployeeController {
 	
 	}
 	
-	
+    
+    
+    
+    
+    
+    
+       
+    
+    
 }
+
