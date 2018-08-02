@@ -38,9 +38,9 @@ public class EmployeeController {
 		/*List<Designation> list=employeeDao.getAlldesignation();
 		model.addAttribute("list",list);*/
 		
-		List<Employee> elist=employeeDao.getAllemployee();
-		model.addAttribute("elist",elist);
-		//ap<Integer,String> desgMap=employeeDao.getDesignationMap();
+		List<Employee> list=employeeDao.getAllemployee();
+		model.addAttribute("list",list);
+		//Map<Integer,String> desgMap=employeeDao.getDesignationMap();
 		
 		
 		return "employee";
@@ -80,7 +80,7 @@ public class EmployeeController {
 	}
 	
 	
-	@RequestMapping(value = "/editEmployee", method = RequestMethod.GET, headers = "Accept=application/json")
+	@RequestMapping(value = "/editEmployee", method = RequestMethod.POST, headers = "Accept=application/json")
 	public String editEmployee(@RequestParam("id") String id,Model model,RedirectAttributes redir)
 	{
 		Employee employee =employeeDao.getEmployeeById(Integer.parseInt(id));
@@ -88,6 +88,7 @@ public class EmployeeController {
 		model.addAttribute("empbean" ,employee);
 		
 		List<Employee> list=employeeDao.getAllemployee();
+		model.addAttribute("roles",employeeDao.getDesignationMap());
 		model.addAttribute("list",list);
 		
 		

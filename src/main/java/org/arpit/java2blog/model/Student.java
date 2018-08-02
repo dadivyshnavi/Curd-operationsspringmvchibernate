@@ -21,6 +21,9 @@ public class Student {
 	private String name;
 	private String marks;
 	private String course;
+	private String address;
+	private String dob;
+	private String phno;
 	public int getId() {
 		return id;
 	}
@@ -45,11 +48,33 @@ public class Student {
 	public void setCourse(String course) {
 		this.course = course;
 	}
-	@Override
-	public String toString() {
-		return "Student [id=" + id + ", name=" + name + ", marks=" + marks + ", course=" + course + "]";
+	
+	
+	
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getDob() {
+		return dob;
+	}
+	public void setDob(String dob) {
+		this.dob = dob;
 	}
 	
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", marks=" + marks + ", course=" + course + ", address="
+				+ address + ", dob=" + dob + ", phno=" + phno + "]";
+	}
+	public String getPhno() {
+		return phno;
+	}
+	public void setPhno(String phno) {
+		this.phno = phno;
+	}
 	
 	
 	
