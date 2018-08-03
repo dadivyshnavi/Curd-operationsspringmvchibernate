@@ -101,6 +101,8 @@ public class StudentDao {
 			Query query=session.createQuery(hql);
 			
 			List<Student> list= query.list();
+			
+			
 			if(list.size()>0)
 			{
 				return true;
@@ -153,5 +155,10 @@ public class StudentDao {
 			 
 			 
 		 }
+
+
+		
+
+		
 
 }

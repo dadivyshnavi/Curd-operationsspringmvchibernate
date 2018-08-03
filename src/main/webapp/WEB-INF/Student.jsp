@@ -42,7 +42,10 @@ th {
             }
 </style>
 <body>
+<h1>Welcome,${item.name}</h1>
+
 <form:form method="post" modelAttribute="stubean" action="${pageContext.request.contextPath}/stu">
+
 <table>
 		<tr>
 			<th colspan="2">Add Student</th>

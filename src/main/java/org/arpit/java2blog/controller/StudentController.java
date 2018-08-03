@@ -2,14 +2,20 @@ package org.arpit.java2blog.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.arpit.java2blog.config.SendSMS;
+import org.arpit.java2blog.dao.LoginDao;
 import org.arpit.java2blog.dao.StudentDao;
 import org.arpit.java2blog.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,8 +30,10 @@ public class StudentController {
 	@Autowired
 	SendSMS sendSMS;
 	 @Autowired
-	    private Environment env;    
-	    
+	    private Environment env;  
+	 @Autowired
+	 LoginDao loginDao;
+	
 	
 	@RequestMapping(value = "/stu", method = RequestMethod.GET, headers = "Accept=application/json")
 	private String showStudentPage(Model model) {
@@ -156,8 +164,46 @@ public class StudentController {
 		
 		}
 		
-	    
-	    
-	    
-
+	
+	@GetMapping("/login")
+	public String showhome1Page()
+	{
+		
+		System.out.println("enter to jsp page");
+		
+		
+		return "login";
+		
+		
+	}
+	
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST, headers = "Accept=application/json")
+	public String showPage(HttpSession session,HttpServletRequest request)
+	{
+		String phno =request.getParameter("uname"); 
+				
+		
+		String password = request.getParameter("pwd");
+		
+		System.out.println(phno+"   "+password);
+		
+		List result =loginDao.checkUserExistOrnot(phno);
+		
+		
+		if(result.isEmpty())
+		{
+			return "login" ;
+		}
+		
+		else
+		{
+			return "redirect:stu";
+			
+		}
+		
+		
+		
+		
+}
 }
