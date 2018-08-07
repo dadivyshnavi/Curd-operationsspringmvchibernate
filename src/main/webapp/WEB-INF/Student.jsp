@@ -7,11 +7,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
  
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> 
- <link rel="stylesheet" href="/resources/demos/style.css"> 
+ <link rel="stylesheet" href="/resources/demos/style.css">  
+ 
 </head>
 <style>           
 .blue-button{
@@ -41,10 +43,15 @@ th {
                 padding: 5px 10px;
             }
 </style>
-<body>
-<h1>Welcome,${item.name}</h1>
 
-<form:form method="post" modelAttribute="stubean" action="${pageContext.request.contextPath}/stu">
+
+
+
+
+<body>
+<h1>Welcome,</h1>
+
+<form:form method="post" modelAttribute="stubean" action="${pageContext.request.contextPath}/stu" enctype="multipart/form-data">
 
 <table>
 		<tr>
@@ -93,7 +100,7 @@ th {
   <tr>
 		<td>
 		  <lablel for="DateOfBirth">DateofBirth</lablel>
-          <form:input path="dob" id="datepicker"></form:input>
+            <form:input path="dob" id="datepicker"></form:input>  
 		</td>
 		</tr>
 		<tr>
@@ -102,6 +109,12 @@ th {
           <form:input path="phno" class="form-control validate numericOnly2" size="30" maxlength="10"></form:input>
           </td>
 		</tr>
+		<tr>
+		<td>
+       <label class="col-md-3 control-label no-padding-right">Select file:</label>
+       <input type="file" name="file1" id="file1" multiple/>
+       </td>
+       </tr>
 		
 		<tr>
 			<td colspan="2"><input type="submit" id="submit1"
@@ -113,7 +126,7 @@ th {
 </form:form>
 <table>
 <tr>
-<th> id  </th> <th> Name  </th> <th> Course </th> <th> Marks  </th><th> Address </th><th> DateofBirth  </th><th> Mobile No  </th><th> Delete Action  </th><th> Edit Action  </th>
+<th> id  </th> <th> Name  </th> <th> Course </th> <th> Marks  </th><th> Address </th><th> DateofBirth  </th><th> Mobile No  </th><th> Files  </th><th> Delete Action  </th><th> Edit Action  </th>
 
 
 </tr>
@@ -128,6 +141,7 @@ th {
 <td> "${item.address }" </td>
 <td> "${item.dob }" </td>
 <td> "${item.phno }" </td>
+<td> "${item.files }" </td>
 <td> <a href="deleteStudent?id=${item.id }">Delete</a> </td>
 <td> <a href="editStudent?id=${item.id }">Edit</a> </td>
 
@@ -146,12 +160,13 @@ th {
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<script>
+  <script>
   $( function() {
     $( "#datepicker" ).datepicker();
   } );
-  </script>
-
+  
+  </script> 
+  
 <!-- this is for show students list and view in same page -->
 
 </html>

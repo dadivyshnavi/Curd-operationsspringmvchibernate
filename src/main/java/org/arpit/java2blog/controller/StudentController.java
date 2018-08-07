@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.arpit.java2blog.config.FilesStuff;
 import org.arpit.java2blog.config.SendSMS;
 import org.arpit.java2blog.dao.LoginDao;
 import org.arpit.java2blog.dao.StudentDao;
@@ -15,10 +16,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class StudentController {
@@ -34,7 +35,7 @@ public class StudentController {
 	 @Autowired
 	 LoginDao loginDao;
 	
-	
+	 @Autowired FilesStuff fileTemplate;
 	@RequestMapping(value = "/stu", method = RequestMethod.GET, headers = "Accept=application/json")
 	private String showStudentPage(Model model) {
 		
@@ -102,15 +103,32 @@ public class StudentController {
 	}
 	
 	@RequestMapping(value = "/stu", method = RequestMethod.POST, headers = "Accept=application/json")
-		public String stuDuplicatesChecking(@ModelAttribute Student student) throws IOException
+		public String stuDuplicatesChecking(@ModelAttribute Student student,@RequestParam("file1") MultipartFile[] uploadedFiles) throws IOException
 		{
 			
-			if(student.getId() ==0)
+			if(student.getId() == 0)
 			{
 			System.out.println(student);
 			boolean result=studentDao.checkUserExistsOrNot(student);
 			if(result==false) 
 			{
+				int filecount =0;
+	        	 
+	        	 for(MultipartFile multipartFile : uploadedFiles) {
+	    				String fileName = multipartFile.getOriginalFilename();
+	    				if(!multipartFile.isEmpty())
+	    				{
+	    					filecount++;
+	    				 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
+	    				}
+	    			}
+	        	 
+	        	 if(filecount>0)
+	        	 {
+	        		 student.setFiles(fileTemplate.concurrentFileNames());
+	        		 fileTemplate.clearFiles();
+	        		 
+	        	 }
 			
 				studentDao.addStudent(student);
 				String message= student.getName()+"registered successfully";
@@ -146,7 +164,25 @@ public class StudentController {
 			{
 				/* redir.addFlashAttribute("msg", "Record updated successfully");
 				 redir.addFlashAttribute("cssMsg", "primary");
-*/
+				 
+*/				int filecount =0;
+
+				for(MultipartFile multipartFile : uploadedFiles) {
+						String fileName = multipartFile.getOriginalFilename();
+						if(!multipartFile.isEmpty())
+						{
+							filecount++;
+						 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
+						}
+					}
+				
+				if(filecount>0)
+				{
+					 student.setFiles(fileTemplate.concurrentFileNames());
+					 fileTemplate.clearFiles();
+					 
+				}
+
 				 studentDao.addStudent(student);
 				
 				

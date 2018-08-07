@@ -24,6 +24,7 @@ public class Student {
 	private String address;
 	private String dob;
 	private String phno;
+	private String files;
 	public int getId() {
 		return id;
 	}
@@ -63,18 +64,24 @@ public class Student {
 	public void setDob(String dob) {
 		this.dob = dob;
 	}
-	
-	@Override
-	public String toString() {
-		return "Student [id=" + id + ", name=" + name + ", marks=" + marks + ", course=" + course + ", address="
-				+ address + ", dob=" + dob + ", phno=" + phno + "]";
-	}
 	public String getPhno() {
 		return phno;
 	}
 	public void setPhno(String phno) {
 		this.phno = phno;
 	}
+	public String getFiles() {
+		return files;
+	}
+	public void setFiles(String files) {
+		this.files = files;
+	}
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", marks=" + marks + ", course=" + course + ", address="
+				+ address + ", dob=" + dob + ", phno=" + phno + ", files=" + files + "]";
+	}
+	
 	
 	
 	
