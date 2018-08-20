@@ -12,8 +12,8 @@
 <title>Insert title here</title>
  
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> 
- <link rel="stylesheet" href="/resources/demos/style.css">  
- 
+<!-- <link rel="stylesheet" href="/resources/demos/style.css">  
+ --> 
 </head>
 <style>           
 .blue-button{
@@ -49,7 +49,8 @@ th {
 
 
 <body>
-<h1>Welcome ${pageContext.request.userPrincipal.name}</h1>
+<h1>Welcome ${loggedInUser}</h1>
+<h2>  The date now is: <%= new java.util.Date() %></h2>
 
 <form:form method="post" modelAttribute="stubean" action="${pageContext.request.contextPath}/stu" enctype="multipart/form-data">
 
@@ -164,6 +165,9 @@ th {
   $( function() {
     $( "#datepicker" ).datepicker();
   } );
+  
+  
+  var items = ${loggedInUser};
   
   </script> 
   

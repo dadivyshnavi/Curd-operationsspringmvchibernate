@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class StudentController {
@@ -224,22 +225,36 @@ public class StudentController {
 		
 		System.out.println(phno+"   "+password);
 		
-		List result =loginDao.checkUserExistOrnot(phno);
+		List<Student> result =loginDao.checkUserExistOrnot(phno);
 		
+		
+		Student student =result.get(0);
 		
 		if(result.isEmpty())
 		{
 			return "login" ;
 		}
 		
-		else
-		{
+		else {
+			System.out.println(student.getName());
+			session.setAttribute("loggedInUser",student.getName());
+			
 			return "redirect:stu";
 			
 		}
+	}
 		
-		
-		
-		
+
+	
+	
 }
-}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
