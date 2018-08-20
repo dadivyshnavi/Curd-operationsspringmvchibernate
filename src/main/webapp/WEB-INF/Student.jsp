@@ -49,7 +49,7 @@ th {
 
 
 <body>
-<h1>Welcome,</h1>
+<h1>Welcome ${pageContext.request.userPrincipal.name}</h1>
 
 <form:form method="post" modelAttribute="stubean" action="${pageContext.request.contextPath}/stu" enctype="multipart/form-data">
 
